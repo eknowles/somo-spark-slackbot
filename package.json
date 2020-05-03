@@ -1,0 +1,38 @@
+{
+  "name": "somo-spark-slackbot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "handler.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Edward Knowles",
+  "license": "MIT",
+  "dependencies": {
+    "@babel/runtime": "^7.9.6",
+    "@middy/core": "^1.0.0",
+    "@middy/http-error-handler": "^1.0.0",
+    "@middy/http-json-body-parser": "^1.0.0",
+    "@slack/interactive-messages": "^1.6.0",
+    "@slack/web-api": "^5.8.1",
+    "phin": "^3.4.1",
+    "qs": "^6.9.3"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/plugin-transform-runtime": "^7.9.6",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/preset-typescript": "^7.3.3",
+    "@types/aws-lambda": "^8.10.51",
+    "babel-loader": "^8.0.6",
+    "cache-loader": "^4.1.0",
+    "fork-ts-checker-webpack-plugin": "^4.1.3",
+    "serverless": "^1.61.0",
+    "serverless-dotenv-plugin": "^2.4.2",
+    "serverless-offline": "^6.1.4",
+    "serverless-webpack": "^5.3.1",
+    "typescript": "^3.8.3",
+    "webpack": "^4.38.0",
+    "webpack-node-externals": "^1.7.2"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "blocks": [
+    {
+      "type": "section",
+      "text": {
+        "type": "plain_text",
+        "text": "Hi, I'm Spark :wave: I'm your personal assistant here at Somo!",
+        "emoji": true
+      }
+    },
+    {
+      "type": "section",
+      "text": {
+        "type": "plain_text",
+        "text": "I'm a smart little robot that can make your work life a little easier. I can do things like update your slack status to mirror your calendar, handle your annual leave and more."
+      }
+    },
+    {
+      "type": "context",
+      "elements": [
+        {
+          "type": "mrkdwn",
+          "text": "My source code is <http://github.com/SomoGlobal/somo-spark-bot|open source on GitHub>. Please report any bugs by <http://github.com/SomoGlobal/somo-spark-bot/issues|creating an issue>."
+        }
+      ]
+    }
+  ]
+}

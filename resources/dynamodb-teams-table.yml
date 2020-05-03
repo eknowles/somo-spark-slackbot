@@ -1,0 +1,17 @@
+Resources:
+  TeamsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: ${self:custom.prefix}-teams
+      AttributeDefinitions:
+        - AttributeName: TeamId
+          AttributeType: S
+      KeySchema:
+        - AttributeName: TeamId
+          KeyType: HASH
+      BillingMode: PAY_PER_REQUEST
+
+Outputs:
+  TeamTableArn:
+    Value:
+      Ref: TeamsTable

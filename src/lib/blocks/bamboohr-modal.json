@@ -1,0 +1,33 @@
+{
+  "type": "modal",
+  "title": {
+    "type": "plain_text",
+    "text": "Connect with BambooHR"
+  },
+  "submit": {
+    "type": "plain_text",
+    "text": "Submit"
+  },
+  "close": {
+    "type": "plain_text",
+    "text": "Cancel"
+  },
+  "blocks": [
+    {
+      "type": "input",
+      "block_id": "kjahsdh1",
+      "label": {
+        "type": "plain_text",
+        "text": "Label of input"
+      },
+      "element": {
+        "type": "plain_text_input",
+        "action_id": "plain_inputasd",
+        "placeholder": {
+          "type": "plain_text",
+          "text": "Enter some plain text"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,96 @@
+app: somo
+service: spark
+org: edwardknowles
+
+package:
+  individually: true
+
+plugins:
+  - serverless-webpack
+  - serverless-offline
+  - serverless-dotenv-plugin
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: ${opt:stage, 'dev'}
+  region: eu-west-2
+  profile: somowebsite
+  stackName: ${self:custom.prefix}-stack
+  cfnRole: arn:aws:iam::738981854487:role/serverless-cfrole
+  logRetentionInDays: 1
+  deploymentBucket:
+    name: somo-serverless-deployment-eu
+    blockPublicAccess: true
+  httpApi:
+    payload: '2.0'
+  versionFunctions: false
+  deploymentPrefix: sls
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:DescribeTable
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource:
+        - "Fn::GetAtt": [ UsersTable, Arn ]
+        - "Fn::GetAtt": [ TeamsTable, Arn ]
+  tags:
+    Project: ${self:service}
+    Stage: ${self:provider.stage}
+    ManagedBy: serverless
+  logs:
+    httpApi: false
+
+functions:
+  slackCommand:
+    name: ${self:custom.prefix}-slack-command
+    handler: src/functions/http/slack-command.handler
+    description: This function responds to slack commands
+    events:
+      - httpApi: POST /slack-command
+
+  slackInteractiveEndpoint:
+    name: ${self:custom.prefix}-slack-interactive-endpoint
+    handler: src/functions/http/slack-interactive-endpoint.handler
+    description: when someone interacts with slack
+    events:
+      - httpApi: POST /slack-interactive-endpoint
+
+  authRedirectSlack:
+    name: ${self:custom.prefix}-auth-redirect-slack
+    handler: src/functions/http/auth-redirect-slack.handler
+    description: handles slack callback redirect
+    events:
+      - httpApi: GET /auth-redirect-slack
+
+  authRedirectGoogle:
+    name: ${self:custom.prefix}-auth-redirect-google
+    handler: src/functions/http/auth-redirect-google.handler
+    description: handles google auth redirect
+    events:
+      - httpApi: GET /auth-redirect-google
+
+#  updateStatus:
+#    name: ${self:custom.prefix}-update-status
+#    handler: src/functions/handler.updateStatus
+#    description: Test function that updates a status every 30 mins
+#    events:
+#      - schedule: cron(*/30 8-19 ? * MON-FRI *)
+
+resources:
+  - ${file(resources/dynamodb-users-table.yml)}
+  - ${file(resources/dynamodb-teams-table.yml)}
+
+custom:
+  prefix: ${self:service}-${self:provider.stage}
+  webpack:
+    webpackConfig: 'webpack.config.js'
+    packager: 'yarn'
+    includeModules: true
+  serverless-offline:
+    httpPort: 9988

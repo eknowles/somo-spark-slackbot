@@ -1,0 +1,17 @@
+Resources:
+  UsersTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: ${self:custom.prefix}-users
+      AttributeDefinitions:
+        - AttributeName: UserName
+          AttributeType: S
+      KeySchema:
+        - AttributeName: UserName
+          KeyType: HASH
+      BillingMode: PAY_PER_REQUEST
+
+Outputs:
+  UsersTableArn:
+    Value:
+      Ref: UsersTable
