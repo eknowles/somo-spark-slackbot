@@ -16,7 +16,7 @@
     "@slack/interactive-messages": "^1.6.0",
     "@slack/web-api": "^5.8.1",
     "phin": "^3.4.1",
-    "qs": "^6.9.3"
+    "qs": "^6.9.7"
   },
   "devDependencies": {
     "@babel/core": "^7.5.5",
